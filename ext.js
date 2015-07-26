@@ -1,7 +1,7 @@
 //requires
 var fs = require('fs');
 
-module.exports =function getListOfFilteredFiles(dirname, ext, callback){}
+module.exports.getListOfFilteredFiles =function (dirname, ext, callback){
 	var listOfAllFiles;
 	var listOfFilteredFiles = [];
 	var err=null;

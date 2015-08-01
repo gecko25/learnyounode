@@ -38,7 +38,7 @@ urls.forEach(function(url){
 						queue.push(output);	
 					}
 			}
-		});
+		}); //end of 'end' event
 	});
 });		
 
@@ -125,9 +125,20 @@ OFFICIAL SOLUTION
 *****
 Notes
 *****
-You had tried a similar methodology, but without
-creating the additional httpGet function. You
-had only tried to use a for loop, and because this
-didn't provide a new scope, it didn't work. 
 
-*/    
+/* these were our mistakes when trying to implement this methodlogy,
+
+1. The printOutput function is OUTISDE the get function AND the response.on function --> BAD!
+   You need to find the rate limiting step crucial to your function and put whatever to be triggered, there.
+    (in this case, the rate limiting step was the nested response.on('end') event handler). 
+    We need to *count* callbacks!
+
+2. There was no good trigger to indicate all the urls had been processed (ie count===urls.length)
+
+3. Be expicit about order and indices here, its important. these forEach statements are getting you 
+   into trouble! *count* *count* *count* use indices!
+
+4. "Counting callbacks is one of the fundamental ways of managing async in Node. 
+   Rather than doing it yourself, you may find it more convenient to rely on 
+   a third-party library such as [async](http://npm.im/async) or [after](http://npm.im/after)"
+*/
